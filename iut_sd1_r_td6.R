@@ -1,15 +1,15 @@
 #Exercice 1 
 
-df <- read.csv(file = "nba2014_2015.csv", sep = ",",
+df <- read.csv(file = "nba2014_2015.csv", sep = ",",    #Ouvrir le csv
                header = TRUE, dec = ".")
-nrow(df) 
+nrow(df) #nombre de ligne du csv
 
-ncol(df) 
+ncol(df) #nombre de colonnes du csv
 
-colnames(df) 
+colnames(df) #nom des colonnes
 
 df$PERIOD = as.factor(df$PERIOD) 
-df$PTS_TYPE = as.factor(df$PTS_TYPE) 
+df$PTS_TYPE = as.factor(df$PTS_TYPE)  #passez les colonnes en facteur 
 df$SHOOTER = as.factor(df$SHOOTER)
 
 #Exercice 2 
@@ -27,7 +27,7 @@ sd(df$SHOT_DIST) #ecart de la colonne SHOT_DIST
 sd(df$SHOT_CLOCK, na.rm = TRUE)
 
 #combien de tirs manqués/réussis
-table(df[  ,"SHOT_RESULT" ])
+table(df[  ,"SHOT_RESULT" ]) #tableau avec les resultats des shoots en frequence
 
 #les quartiles
 quantile(df$SHOT_CLOCK, na.rm = TRUE) 
@@ -36,7 +36,7 @@ quantile(df$SHOT_CLOCK, na.rm = TRUE)
 quantile(df$CLOSE_DEF_DIST, probs = seq(0.1,0.9,0.1))
 
 #nombre de matches différents
-liste_game = unique(df$GAME_ID)
+liste_game = unique(df$GAME_ID) 
 length(liste_game)
 
 #nombre de joueurs différents
@@ -60,7 +60,7 @@ df2 <- df[  , -1 ]
 #Exercice 3 
 
 #Les 100 tirs réussis ou manqués les plus loin
-rang <- order(df$SHOT_DIST, decreasing = TRUE)
+rang <- order(df$SHOT_DIST, decreasing = TRUE) #ordonnez ces colonnes
 df3 <- df[rang, ]
 df3 <- df3[1:100, ]
 
@@ -73,7 +73,7 @@ df_kobe = subset(df,SHOT_RESULT == "made" &
                    PTS_TYPE == 3 & 
                    SHOOTER == "kobe bryant")
 
-dim(df_kobe)
+dim(df_kobe) #avoir les dimensions de ses colonnes 
 
 #Le TOP5 des joueurs qui ont marqués le plus de points dans la saison
 df_total <- aggregate(PTS_MARQUES ~ SHOOTER, data = df, FUN = sum)
